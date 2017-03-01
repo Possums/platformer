@@ -17,7 +17,7 @@ public class MovingObjectsPanel extends JPanel {
 		makeGameMap();
 	}
 	private void makeGameMap() {
-		gm = new DiepIOMap();
+		gm = new PlatformerMap();
 	}
 	
 
