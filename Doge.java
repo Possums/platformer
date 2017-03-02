@@ -7,7 +7,8 @@ import javax.imageio.ImageIO;
 
 
 public class Doge extends GameObject {
-	public Doge(){
+	public Doge(double speed, double direction, double size, double health, int x, int y){
+		super(speed, direction, size, health, x, y, null);
 		try {                
 			URL url = getClass().getResource("images/doge.png");
 			setImg(ImageIO.read(url));
@@ -24,7 +25,7 @@ public class Doge extends GameObject {
 	@Override
 	public void draw(Graphics g) {
 		getImg().getHeight(null);
-		g.drawImage(getImg(), 0, 0, null);
+		g.drawImage(getImg(), getX(), getY(), null);
 	}
 	
 }

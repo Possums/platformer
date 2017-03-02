@@ -11,8 +11,10 @@ public class PlatformerMap extends GameMap {
 
 	Image background;
 	Dimension a = Toolkit.getDefaultToolkit().getScreenSize();
+	int mapX = a.width;
+	int mapY = a.height;
 	public PlatformerMap() {
-
+		addGameObject(new Doge(Math.random(),Math.random()*Math.PI*2, 100, 3, 0, 0));
 
 
 	}
@@ -31,7 +33,8 @@ public class PlatformerMap extends GameMap {
 	}
 
 	public void draw(Graphics g){
-		g.drawImage(background, 0,0, 3840, 2160, null);
+		g.drawImage(background, 0,0, mapX, mapY, null);
+		super.draw(g);
 	}
 
 }
