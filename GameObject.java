@@ -7,19 +7,19 @@ public abstract class GameObject implements MovingObject {
 
 	private double speed;// 0 - 10
 	private double direction, // degrees or radians
-		x, y, // >= 0
+		 // >= 0
 	
 	
 		size, // 10 might be a good size   
 		health; // 0 - 100
-	private int level;//
+	private int x, y;//
 	private Color color;
 	private Image img;
 
 	@Override
 	public void move() {
-		x+= speed*Math.cos(direction);
-		y+= speed*Math.sin(direction);
+		x += (int) (getSpeed()*Math.cos(direction));
+		y += (int) (getSpeed()*Math.sin(direction));
 		resetDir();
 		gravity();
 		checkOffScreen();
@@ -44,7 +44,39 @@ public abstract class GameObject implements MovingObject {
 	@Override
 	public Rectangle getBoundingRect() {
 		
-		return new Rectangle((int)x,(int)y,(int)size,(int)size);
+		return new Rectangle((int)getX(),(int)getY(),(int)size,(int)size);
 	}
-
+	public Image getImg() {
+		return img;
+	}
+	public void setImg(Image img) {
+		this.img = img;
+	}
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public double getSpeed() {
+		return speed;
+	}
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+	public GameObject (double speed, double direction, double size, double health, int x, int y, Color c){
+		this.speed = speed;
+		this.direction = direction;
+		this.size = size;
+		this.health = health;
+		this.x = x;
+		this.y = y;
+		this.color = c;
+	}
 }
