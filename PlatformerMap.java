@@ -1,4 +1,7 @@
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -41,8 +44,16 @@ public class PlatformerMap extends GameMap {
 
 	public void draw(Graphics g){
 		g.drawImage(background, 0,0, mapX, mapY, null);
-		g.drawImage(platform, 0 , 3*mapY/4, mapX/2, mapY/8, null);
-		g.drawImage(platform, mapX/2 , 3*mapY/4, mapX/2, mapY/8, null);
+		g.drawImage(platform, 0 , (int)(4.75*mapY/6), mapX/2, mapY/8, null);
+		g.drawImage(platform, mapX/2 , (int)(4.75*mapY/6), mapX/2, mapY/8, null);
+		//---------------------
+		g.setFont(new Font("Comic Sans MS", Font.PLAIN, 300)); 
+		g.setColor(Color.YELLOW);
+		FontMetrics metrics = g.getFontMetrics();
+		int x = (3840 - metrics.stringWidth("MEMES")) / 2;
+		int y = ((2160 - metrics.getHeight()) / 2) + metrics.getAscent();
+		g.drawString("MEMES", x, y);
+		//---------------------
 		super.draw(g);
 	}
 
