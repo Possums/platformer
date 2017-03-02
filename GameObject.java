@@ -19,8 +19,9 @@ public abstract class GameObject implements MovingObject {
 	@Override
 	public void move() {
 		x += (int) (getSpeed()*Math.cos(direction));
-		y += (int) (getSpeed()*Math.sin(direction));
+		y -= (int) (getSpeed()*Math.sin(direction));
 		resetDir();
+		System.out.println(direction);
 		gravity();
 		checkOffScreen();
 		// maybe "push" back onto the screen change direction if
@@ -28,14 +29,15 @@ public abstract class GameObject implements MovingObject {
 	}
 	public void gravity() {
 		if(direction>(3*Math.PI/2)||direction<(Math.PI/2))
-			direction --;
+			direction -= Math.PI/16;
 		if(direction<(3*Math.PI/2)&&direction>(Math.PI/2))
-			direction ++;
+			direction += Math.PI/16;
+			
 	}
 	public void resetDir() {
-		if(direction>2*Math.PI)
+		while(direction > 2*Math.PI)
 			direction -= 2*Math.PI;
-		if(direction<2*Math.PI)
+		while(direction < 0)
 			direction += 2*Math.PI;
 	}
 	public abstract void checkOffScreen();
