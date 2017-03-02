@@ -76,6 +76,10 @@ public abstract class GameMap {
 	}
 
 	public void tick() {
+		// TODO Auto-generated method stub
+		for (MovingObject MO: movers){
+			MO.move();
+		}
 		
 	} 	
 }
