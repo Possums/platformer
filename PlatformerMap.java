@@ -14,9 +14,7 @@ public class PlatformerMap extends GameMap {
 	int mapX = a.width;
 	int mapY = a.height;
 	public PlatformerMap() {
-		addGameObject(new Doge(Math.random(),Math.random()*Math.PI*2, 100, 3, 0, 0));
-
-
+		addGameObject(new Doge(Math.random(),Math.random()*Math.PI*2, 100, 3, x, x));
 	}
 
 

@@ -76,7 +76,6 @@ public abstract class GameMap {
 	}
 
 	public void tick() {
-		// TODO Auto-generated method stub
 		
 	} 	
 }
