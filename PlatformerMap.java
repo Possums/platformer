@@ -16,8 +16,10 @@ public class PlatformerMap extends GameMap {
 	Dimension a = Toolkit.getDefaultToolkit().getScreenSize();
 	int mapX = a.width;
 	int mapY = a.height;
+	Doge doge;
 	public PlatformerMap() {
-		addGameObject(new Doge(10,Math.random()*Math.PI*2, 100, 3, 0, 0));
+		doge = (new Doge(10,Math.random()*Math.PI*2, 100, 3, 0, 0));
+		addGameObject(doge);
 	}
 
 
@@ -44,17 +46,47 @@ public class PlatformerMap extends GameMap {
 
 	public void draw(Graphics g){
 		g.drawImage(background, 0,0, mapX, mapY, null);
-		g.drawImage(platform, 0 , (int)(4.75*mapY/6), mapX/2, mapY/8, null);
-		g.drawImage(platform, mapX/2 , (int)(4.75*mapY/6), mapX/2, mapY/8, null);
+		g.drawImage(platform, 0 , (int)(0.82*mapY), mapX/2, mapY/8, null);
+		g.drawImage(platform, mapX/2 , (int)(0.82*mapY), mapX/2, mapY/8, null);
+		g.setColor(Color.YELLOW);
+		g.drawLine(0, (int)(0.82*mapY), mapX, (int)(0.82*mapY));
 		//---------------------
 		g.setFont(new Font("Comic Sans MS", Font.PLAIN, 300)); 
 		g.setColor(Color.YELLOW);
 		FontMetrics metrics = g.getFontMetrics();
-		int x = (3840 - metrics.stringWidth("MEMES")) / 2;
+		int x = (3840 - metrics.stringWidth("Wow")) / 2;
 		int y = ((2160 - metrics.getHeight()) / 2) + metrics.getAscent();
-		g.drawString("MEMES", x, y);
+		g.drawString("Wow", x, y);
 		//---------------------
 		super.draw(g);
+	}
+	
+	public void stopDoge(){
+		doge.setSpeed(0);
+	}
+	
+	public void moveDown(){
+		//t.setY((int)(t.getY()-10));
+		doge.setDirection((Math.PI/2));
+		doge.setSpeed(15);
+	}
+
+	public void moveUp(){
+		//t.setY((int)(doge.getY()+10));
+		doge.setDirection((3*Math.PI/2));
+		doge.setSpeed(15);
+	}
+
+	public void moveRight(){
+		//doge.setX((int)(doge.getX()+10));
+		doge.setDirection(0);
+		doge.setSpeed(15);
+	}
+
+	public void moveLeft(){
+		//doge.setX((int)(doge.getX()-10));
+		doge.setDirection(Math.PI);
+		doge.setSpeed(15);
 	}
 
 }

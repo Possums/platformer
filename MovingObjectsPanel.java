@@ -15,6 +15,8 @@ public class MovingObjectsPanel extends JPanel {
 	////Panel class
 	private Timer t;// belongs to the class
 	private final int tickRate = 15;
+	final Dimension defaultDim;// = new Dimension(800,600);
+	PlatformerMap gm;
 
 	public MovingObjectsPanel(Dimension dim) {
 		defaultDim = dim;
@@ -35,8 +37,7 @@ public class MovingObjectsPanel extends JPanel {
 		};
 		t = new Timer(tickRate, aL);// this semicolon is here because it is the end of the new Timer construction...
 	}
-	final Dimension defaultDim;// = new Dimension(800,600);
-	GameMap gm;
+
 
 	public MovingObjectsPanel() {
 		this( new Dimension(900,1600));
@@ -45,99 +46,72 @@ public class MovingObjectsPanel extends JPanel {
 		super.paintComponent(g);  
 		gm.draw(g); 
 	}
+
 	private void setUpKeyMappings() {
 		// maps keys with actions...
 		//  The code below maps a KeyStroke to an action to be performed
 		// In this case I mapped the space bar key to the action named "shoot"
 		// Whenever someone hits the Space Bar the action shoot is sent out
 
-		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"),"shoot");
-		this.getInputMap().put(KeyStroke.getKeyStroke("W"),"up");
-		this.getInputMap().put(KeyStroke.getKeyStroke("A"),"left");
-		this.getInputMap().put(KeyStroke.getKeyStroke("S"),"down");
-		this.getInputMap().put(KeyStroke.getKeyStroke("D"),"right");
-		this.getInputMap().put(KeyStroke.getKeyStroke("released SPACE"),"released shoot");
-		this.getInputMap().put(KeyStroke.getKeyStroke("released W"),"released up");
-		this.getInputMap().put(KeyStroke.getKeyStroke("released A"),"released left");
-		this.getInputMap().put(KeyStroke.getKeyStroke("released S"),"released down");
-		this.getInputMap().put(KeyStroke.getKeyStroke("released D"),"released right");
+//		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"),"shoot");
+		this.getInputMap().put(KeyStroke.getKeyStroke("W"), "moveUp");
+		this.getInputMap().put(KeyStroke.getKeyStroke("S"), "moveDown");
+		this.getInputMap().put(KeyStroke.getKeyStroke("D"), "moveRight");
+		this.getInputMap().put(KeyStroke.getKeyStroke("A"), "moveLeft");
+		this.getInputMap().put(KeyStroke.getKeyStroke("released W"), "stop");
+		this.getInputMap().put(KeyStroke.getKeyStroke("released S"), "stop");
+		this.getInputMap().put(KeyStroke.getKeyStroke("released D"), "stop");
+		this.getInputMap().put(KeyStroke.getKeyStroke("released A"), "stop");
+
 		//  This associates the command shoot with some action.  In this 
 		// case, the action triggers a shoot command invoked on my GameMap.  In general, whatever 
 		// goes in the actionPerformed method will be executed when a shoot command
 		// is sent...
-			
-		this.getActionMap().put("shoot",new AbstractAction(){
+
+//		this.getActionMap().put("shoot",new AbstractAction(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//				gm.shoot();
+//			}
+//		});
+		this.getActionMap().put("stop",new AbstractAction(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("space");
-				gm.spaceKeyHit();
-			}
-		});this.getActionMap().put("left",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("left");
-				gm.leftKeyHit();
-			}
-		});this.getActionMap().put("up",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("up");
-				gm.upKeyHit();
-			}
-		});this.getActionMap().put("right",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("right");
-				gm.rightKeyHit();
-			}
-		});this.getActionMap().put("down",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("down");
-				gm.downKeyHit();
-			}
-		});this.getActionMap().put("released shoot",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				gm.spaceKeyReleased();
-			}
-		});this.getActionMap().put("released left",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("released left");
-				gm.leftKeyReleased();
-			}
-		});this.getActionMap().put("released up",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("released up");
-				gm.upKeyReleased();
-			}
-		});this.getActionMap().put("released right",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("released right");
-				gm.rightKeyReleased();
-			}
-		});this.getActionMap().put("released down",new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("released down");
-				gm.downKeyReleased();
+
+				gm.stopDoge();
 			}
 		});
+
+		this.getActionMap().put("moveUp", new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				gm.moveUp();
+			}
+		});
+
+		this.getActionMap().put("moveDown", new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				gm.moveDown();
+			}
+		});
+
+		this.getActionMap().put("moveRight", new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				gm.moveRight();
+			}
+		});
+
+		this.getActionMap().put("moveLeft", new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				gm.moveLeft();
+			}
+		});
+
 		this.requestFocusInWindow();		
 	}
-
 
 }

@@ -19,7 +19,7 @@ public abstract class GameObject implements MovingObject {
 	@Override
 	public void move() {
 		x += (int) (getSpeed()*Math.cos(direction));
-		y -= (int) (getSpeed()*Math.sin(direction));
+		y += (int) (getSpeed()*Math.sin(direction));
 		resetDir();
 		System.out.println(direction);
 		gravity();
@@ -28,10 +28,11 @@ public abstract class GameObject implements MovingObject {
 		// this object goes off the screen
 	}
 	public void gravity() {
-		if(direction>(3*Math.PI/2)||direction<(Math.PI/2))
-			direction -= Math.PI/16;
-		if(direction<(3*Math.PI/2)&&direction>(Math.PI/2))
-			direction += Math.PI/16;
+//		if(direction>(3*Math.PI/2)||direction<(Math.PI/2))
+//			direction -= Math.PI/16;
+//		if(direction<(3*Math.PI/2)&&direction>(Math.PI/2))
+//			direction += Math.PI/16;
+		//System.out.println("gravity");
 			
 	}
 	public void resetDir() {
@@ -72,6 +73,15 @@ public abstract class GameObject implements MovingObject {
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
+	
+	public void setDirection(double direction){
+		this.direction = direction;
+	}
+	
+	public double getDirection(){
+		return this.direction;
+	}
+	
 	public GameObject (double speed, double direction, double size, double health, int x, int y, Color c){
 		this.speed = speed;
 		this.direction = direction;
