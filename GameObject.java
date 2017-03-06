@@ -10,18 +10,29 @@ public abstract class GameObject implements MovingObject {
 		 // >= 0
 	
 	
-		size, // 10 might be a good size   
+		 // 10 might be a good size   
 		health; // 0 - 100
-	private int x, y;//
+	private int x, y, size;//
 	private Color color;
 	private Image img;
-
+	private Rectangle rect = new Rectangle();
+	
+	public GameObject (double speed, double direction, int size, double health, int x, int y, Color c){
+		this.speed = speed;
+		this.direction = direction;
+		this.size = size;
+		this.health = health;
+		this.x = x;
+		this.y = y;
+		this.color = c;
+	}
+	
 	@Override
 	public void move() {
 		x += (int) (getSpeed()*Math.cos(direction));
 		y += (int) (getSpeed()*Math.sin(direction));
 		resetDir();
-		System.out.println(direction);
+		//System.out.println(direction);
 		gravity();
 		checkOffScreen();
 		// maybe "push" back onto the screen change direction if
@@ -44,11 +55,7 @@ public abstract class GameObject implements MovingObject {
 	public abstract void checkOffScreen();
 	
 	
-	@Override
-	public Rectangle getBoundingRect() {
-		
-		return new Rectangle((int)getX(),(int)getY(),(int)size,(int)size);
-	}
+
 	public Image getImg() {
 		return img;
 	}
@@ -81,14 +88,20 @@ public abstract class GameObject implements MovingObject {
 	public double getDirection(){
 		return this.direction;
 	}
-	
-	public GameObject (double speed, double direction, double size, double health, int x, int y, Color c){
-		this.speed = speed;
-		this.direction = direction;
-		this.size = size;
-		this.health = health;
-		this.x = x;
-		this.y = y;
-		this.color = c;
+
+	public void openBackgroundImage() {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	@Override
+	public Rectangle getBoundingRect() {
+		return this.rect;
+	}
+
+	public void setBoundingRect(int x, int y, int width, int height){
+		rect.setBounds(x, y, width, height);
+	}
+	
+	
 }

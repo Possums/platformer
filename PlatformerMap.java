@@ -9,6 +9,7 @@ import java.net.URL;
 
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class PlatformerMap extends GameMap {
 
@@ -17,11 +18,33 @@ public class PlatformerMap extends GameMap {
 	int mapX = a.width;
 	int mapY = a.height;
 	Doge doge;
+	GameObject platform1, platform2, platform3;
+
 	public PlatformerMap() {
-		doge = (new Doge(10,Math.random()*Math.PI*2, 100, 3, 0, 0));
+		doge = (new Doge(10,Math.random()*Math.PI*2, mapX/20, 3, 0, 0));
+		platform1 = new Platform(0,0,0,0,   0, (int)(0.82*mapY), mapX, mapY);
+		platform2 = new Platform(0,0,0,0,   mapX/2, (int)(0.82*mapY), mapX, mapY);
+		platform3 = new Platform(0,0,0,0,   mapX/2, (int)(0.3*mapY), mapX, mapY);
+		addGameObject(platform1);
+		addGameObject(platform2);
+		addGameObject(platform3);
 		addGameObject(doge);
+
 	}
 
+	public void tick(){
+		super.tick();
+		doge.setBoundingRect(doge.getX(), doge.getY(), (mapX/20) * 2, (mapX/20) * 3 - 20);
+		if (doge.getBoundingRect().intersects(platform1.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform3.getBoundingRect())){
+			doge.setSpeed(0);
+			//JOptionPane.showMessageDialog(null, "intersection");
+		}
+		//System.out.println("doge" + doge.getBoundingRect());
+		//System.out.println("platform" + platform1.getBoundingRect());
+
+	}
 
 	@Override
 	public void openBackgroundImage() {
@@ -33,7 +56,7 @@ public class PlatformerMap extends GameMap {
 			System.out.println("problem opening the background");
 			e.printStackTrace();
 		}
-		
+
 		try {
 			URL url = getClass().getResource("images/platform.png");
 			platform = ImageIO.read(url);
@@ -41,15 +64,20 @@ public class PlatformerMap extends GameMap {
 			System.out.println("problem opening the background");
 			e.printStackTrace();
 		}	
-		
+
 	}
 
 	public void draw(Graphics g){
+		for (int i=0; i<movers.size(); i++){
+			//System.out.println(movers.get(i));
+			movers.get(i).draw(g);
+		}
+
 		g.drawImage(background, 0,0, mapX, mapY, null);
-		g.drawImage(platform, 0 , (int)(0.82*mapY), mapX/2, mapY/8, null);
-		g.drawImage(platform, mapX/2 , (int)(0.82*mapY), mapX/2, mapY/8, null);
+		//g.drawImage(platform, 0 , (int)(0.82*mapY), mapX/2, mapY/8, null);
+		//g.drawImage(platform, mapX/2 , (int)(0.82*mapY), mapX/2, mapY/8, null);
 		g.setColor(Color.YELLOW);
-		g.drawLine(0, (int)(0.82*mapY), mapX, (int)(0.82*mapY));
+		//g.drawLine(0, (int)(0.82*mapY), mapX, (int)(0.82*mapY));
 		//---------------------
 		g.setFont(new Font("Comic Sans MS", Font.PLAIN, 300)); 
 		g.setColor(Color.YELLOW);
@@ -60,15 +88,23 @@ public class PlatformerMap extends GameMap {
 		//---------------------
 		super.draw(g);
 	}
-	
+
+	public void shoot(){
+		this.addGameObject(doge.shoot());
+	}
+
 	public void stopDoge(){
 		doge.setSpeed(0);
 	}
-	
+
 	public void moveDown(){
 		//t.setY((int)(t.getY()-10));
-		doge.setDirection((Math.PI/2));
-		doge.setSpeed(15);
+		if (!(doge.getBoundingRect().intersects(platform1.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform3.getBoundingRect()))){
+			doge.setDirection((Math.PI/2));
+			doge.setSpeed(15);
+		}
 	}
 
 	public void moveUp(){

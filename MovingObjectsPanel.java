@@ -53,11 +53,8 @@ public class MovingObjectsPanel extends JPanel {
 		// In this case I mapped the space bar key to the action named "shoot"
 		// Whenever someone hits the Space Bar the action shoot is sent out
 
-//		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"),"shoot");
-		this.getInputMap().put(KeyStroke.getKeyStroke("W"), "moveUp");
-		this.getInputMap().put(KeyStroke.getKeyStroke("S"), "moveDown");
-		this.getInputMap().put(KeyStroke.getKeyStroke("D"), "moveRight");
-		this.getInputMap().put(KeyStroke.getKeyStroke("A"), "moveLeft");
+		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"),"shoot");
+
 		this.getInputMap().put(KeyStroke.getKeyStroke("released W"), "stop");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released S"), "stop");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released D"), "stop");
@@ -67,14 +64,38 @@ public class MovingObjectsPanel extends JPanel {
 		// case, the action triggers a shoot command invoked on my GameMap.  In general, whatever 
 		// goes in the actionPerformed method will be executed when a shoot command
 		// is sent...
+        IsKeyPressed.detectKeyPress();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Timer(60, new ActionListener() {
+                    @Override
+                    public void actionPerformed (ActionEvent actionEvent){
+                        if (IsKeyPressed.isWPressed() || IsKeyPressed.isUpPressed()) {
+                            gm.moveUp();;
+                        }
+                        if (IsKeyPressed.isSPressed() || IsKeyPressed.isDownPressed()) {
+                            gm.moveDown();
+                        }
+                        if (IsKeyPressed.isAPressed() || IsKeyPressed.isLeftPressed()) {
+                            gm.moveLeft();
+                        }
+                        if (IsKeyPressed.isDPressed() || IsKeyPressed.isRightPressed()) {
+                            gm.moveRight();;
+                        }
+                    }
+                }).start();
+            }
+        }).start();
+		
+		//---------------
+		this.getActionMap().put("shoot",new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-//		this.getActionMap().put("shoot",new AbstractAction(){
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//
-//				gm.shoot();
-//			}
-//		});
+				gm.shoot();
+			}
+		});
 		this.getActionMap().put("stop",new AbstractAction(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,33 +104,7 @@ public class MovingObjectsPanel extends JPanel {
 			}
 		});
 
-		this.getActionMap().put("moveUp", new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				gm.moveUp();
-			}
-		});
-
-		this.getActionMap().put("moveDown", new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				gm.moveDown();
-			}
-		});
-
-		this.getActionMap().put("moveRight", new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				gm.moveRight();
-			}
-		});
-
-		this.getActionMap().put("moveLeft", new AbstractAction(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				gm.moveLeft();
-			}
-		});
+	
 
 		this.requestFocusInWindow();		
 	}
