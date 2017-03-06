@@ -24,7 +24,7 @@ public class PlatformerMap extends GameMap {
 
 
 	public PlatformerMap() {
-		doge = (new Doge(10,Math.random()*Math.PI*2, mapX/20, 3, 0, 0));
+		doge = (new Doge(mapX/160,0, mapX/20, 3, 0, 0));
 		platform1 = new Platform(0,0,0,0,   0, (int)(0.82*mapY), mapX, mapY);
 		platform2 = new Platform(0,0,0,0,   mapX/2, (int)(0.82*mapY), mapX, mapY);
 		platform3 = new Platform(0,0,0,0,   mapX/2, (int)(0.3*mapY), mapX, mapY);
@@ -116,7 +116,7 @@ public class PlatformerMap extends GameMap {
 				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
 				|| doge.getBoundingRect().intersects(platform3.getBoundingRect()))){
 			doge.setDirection((Math.PI/2));
-			doge.setSpeed(15);
+			doge.setSpeed(mapY/160);
 		}
 	}
 
@@ -133,13 +133,13 @@ public class PlatformerMap extends GameMap {
 	public void moveRight(){
 		//doge.setX((int)(doge.getX()+10));
 		doge.setDirection(0);
-		doge.setSpeed(15);
+		doge.setSpeed(mapY/160);
 	}
 
 	public void moveLeft(){
 		//doge.setX((int)(doge.getX()-10));
 		doge.setDirection(Math.PI);
-		doge.setSpeed(15);
+		doge.setSpeed(mapY/160);
 	}
 
 }
