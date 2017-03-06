@@ -30,6 +30,8 @@ public class Doge extends GameObject {
 	
 	}
 	
+
+	
 	@Override
 	public void draw(Graphics g) {
 		getImg().getHeight(null);

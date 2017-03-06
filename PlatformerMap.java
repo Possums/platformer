@@ -19,6 +19,9 @@ public class PlatformerMap extends GameMap {
 	int mapY = a.height;
 	Doge doge;
 	GameObject platform1, platform2, platform3;
+	boolean jump;
+	int jumpCounter;
+
 
 	public PlatformerMap() {
 		doge = (new Doge(10,Math.random()*Math.PI*2, mapX/20, 3, 0, 0));
@@ -34,6 +37,16 @@ public class PlatformerMap extends GameMap {
 
 	public void tick(){
 		super.tick();
+		if (jump && jumpCounter < 10){
+			doge.setY(doge.getY()-(mapY/40));
+			jumpCounter++;
+		}
+		else if (!(doge.getBoundingRect().intersects(platform1.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform3.getBoundingRect()))){
+			doge.setY(doge.getY()+(mapY/40));
+			
+		}
 		doge.setBoundingRect(doge.getX(), doge.getY(), (mapX/20) * 2, (mapX/20) * 3 - 20);
 		if (doge.getBoundingRect().intersects(platform1.getBoundingRect())
 				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
@@ -109,8 +122,12 @@ public class PlatformerMap extends GameMap {
 
 	public void moveUp(){
 		//t.setY((int)(doge.getY()+10));
-		doge.setDirection((3*Math.PI/2));
-		doge.setSpeed(15);
+		if (doge.getBoundingRect().intersects(platform1.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
+				|| doge.getBoundingRect().intersects(platform3.getBoundingRect())){
+			jump = true;
+			jumpCounter = 0;
+		}
 	}
 
 	public void moveRight(){
