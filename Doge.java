@@ -7,8 +7,10 @@ import javax.imageio.ImageIO;
 
 
 public class Doge extends GameObject {
+	double projectileSpeed;
 	public Doge(double speed, double direction, int size, double health, int x, int y){
 		super(speed, direction, size, health, x, y, null);
+		projectileSpeed = speed*1.5;
 		try {                
 			URL url = getClass().getResource("images/doge.png");
 			setImg(ImageIO.read(url).getScaledInstance(size*2, size*3, 0));
@@ -24,13 +26,11 @@ public class Doge extends GameObject {
 	}
 	
 	public GameObject shoot(){
-		Dew b = new Dew(10, 0, 50, 1000, this.getX(), this.getY(), Color.red);
+		Dew b = new Dew(projectileSpeed, 0, getSize()/10, 1000, this.getX(), this.getY(), Color.red);
 		System.out.println("shoot mountain dews");
 		return b;
 	
 	}
-	
-
 	
 	@Override
 	public void draw(Graphics g) {

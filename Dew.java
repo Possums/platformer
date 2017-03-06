@@ -13,7 +13,6 @@ public class Dew extends GameObject{
 		super(speed, direction, size, health, x, y, c);
 		openBackgroundImage();
 		this.setDirection(direction);
-		setSpeed(75);
 
 	}
 
@@ -29,7 +28,7 @@ public class Dew extends GameObject{
 	@Override
 	public void draw(Graphics g) {
 		//		this.setBoundingRect((int)this.getX(), (int)this.getY(), 20, 20);
-		g.drawImage(dew, this.getX(), this.getY(), 140, 60, null);
+		g.drawImage(dew, this.getX(), this.getY(), 14*getSize(), 6*getSize(), null);
 
 	}
 

@@ -84,7 +84,9 @@ public abstract class GameObject implements MovingObject {
 	public void setDirection(double direction){
 		this.direction = direction;
 	}
-	
+	public int getSize(){
+		return size;
+	}
 	public double getDirection(){
 		return this.direction;
 	}
