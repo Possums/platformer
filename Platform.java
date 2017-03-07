@@ -20,8 +20,10 @@ public class Platform extends GameObject {
 		} 
 		catch (IOException ex) {
 			// handle exception...
+		
+		
 		}
-		this.setBoundingRect(this.getX(), this.getY() + mapY / 24, mapX/2, mapY/8);
+		this.setBoundingRect(this.getX(), this.getY()+mapY/ 8, mapX/4, mapY/16);
 	}
 	@Override
 	public void checkOffScreen() {
@@ -31,7 +33,8 @@ public class Platform extends GameObject {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(platform, this.getX() , this.getY(), mapX/2, mapY/8, null);
+		g.drawImage(platform, this.getX() , this.getY(), mapX/4, mapY/16, null);
+		g.drawRect(this.getX(), this.getY(), this.getBoundingRect().width, this.getBoundingRect().height);
 	}
 
 }

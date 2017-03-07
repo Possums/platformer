@@ -24,10 +24,10 @@ public class PlatformerMap extends GameMap {
 	int shootCounter;
 
 	public PlatformerMap() {
-		doge = (new Doge(mapX/100,0, mapX/18, 3, 0, 0));
-		platform1 = new Platform(0,0,0,0,   0, (int)(0.82*mapY), mapX, mapY);
-		platform2 = new Platform(0,0,0,0,   mapX/2, (int)(0.82*mapY), mapX, mapY);
-		platform3 = new Platform(0,0,0,0,   mapX/2, (int)(0.4*mapY), mapX, mapY);
+		doge = (new Doge(mapX/200,0, mapX/36, 3, 0, 0));
+		platform1 = new Platform(0,0,0,0,   0, mapY/2, mapX/2, mapY/2);
+		platform2 = new Platform(0,0,0,0,   mapX/4, mapY/2, mapX/2, mapY/2);
+		platform3 = new Platform(0,0,0,0,   mapX/4, mapY/4, mapX/2, mapY/2);
 		addGameObject(platform1);
 		addGameObject(platform2);
 		addGameObject(platform3);
@@ -47,7 +47,7 @@ public class PlatformerMap extends GameMap {
 			doge.setY(doge.getY()+(mapY/35));
 			
 		}
-		doge.setBoundingRect(doge.getX(), doge.getY(), mapX/9, mapX/6);
+		doge.setBoundingRect(doge.getX(), doge.getY(), mapX/18, mapX/12);
 		if (doge.getBoundingRect().intersects(platform1.getBoundingRect())
 				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
 				|| doge.getBoundingRect().intersects(platform3.getBoundingRect())){
@@ -104,7 +104,7 @@ public class PlatformerMap extends GameMap {
 	}
 
 	public void shoot(){
-		if(shootCounter > 10){
+	if(shootCounter >5){
 			addGameObject(doge.shoot());
 			shootCounter = 0;
 		}

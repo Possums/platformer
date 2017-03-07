@@ -10,6 +10,7 @@ public class Doge extends GameObject {
 	double projectileSpeed;
 	public Doge(double speed, double direction, int size, double health, int x, int y){
 		super(speed, direction, size, health, x, y, null);
+		setBoundingRect(getX(), getY(), size*2, size*3);
 		projectileSpeed = speed*1.5;
 		try {                
 			URL url = getClass().getResource("images/doge.png");
@@ -17,7 +18,7 @@ public class Doge extends GameObject {
 	       } catch (IOException ex) {
 	            // handle exception...
 	       }
-		this.setBoundingRect(this.getX(), this.getY(), size*2, (size*3)-20);
+		
 	}
 	@Override
 	public void checkOffScreen() {

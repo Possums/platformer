@@ -106,7 +106,15 @@ public class MovingObjectsPanel extends JPanel {
 
 	
 
-		this.requestFocusInWindow();		
+		this.requestFocusInWindow();	
+		/*
+		new Timer(750, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gm.shoot();
+			}
+		}).start();
+		*/
 	}
 
 }

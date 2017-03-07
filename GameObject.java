@@ -98,7 +98,7 @@ public abstract class GameObject implements MovingObject {
 	
 	@Override
 	public Rectangle getBoundingRect() {
-		return this.rect;
+		return this.rect.getBounds();
 	}
 
 	public void setBoundingRect(int x, int y, int width, int height){
