@@ -21,7 +21,7 @@ public class Platform extends GameObject {
 		catch (IOException ex) {
 			// handle exception...
 		}
-		this.setBoundingRect(this.getX(), this.getY() + mapY / 24, mapX/2, mapY/8);
+		this.setBoundingRect(this.getX(), this.getY() + mapY / 24, mapX/2, mapY/16);
 	}
 	@Override
 	public void checkOffScreen() {

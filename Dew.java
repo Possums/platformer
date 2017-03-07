@@ -13,7 +13,7 @@ public class Dew extends GameObject{
 		super(speed, direction, size, health, x, y, c);
 		openBackgroundImage();
 		this.setDirection(direction);
-
+		this.setSpeed(50);
 	}
 
 
