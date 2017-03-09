@@ -10,8 +10,8 @@ public class Platform extends GameObject {
 	
 	Image platform;
 	int mapX, mapY;
-	public Platform(double speed, double direction, int size, double health, int x, int y, int mapX, int mapY){
-		super(speed, direction, size, health, x, y, null);
+	public Platform(int x, int y, int mapX, int mapY){
+		super(0, 0, 0, 0, x, y, null);
 		this.mapX = mapX;
 		this.mapY = mapY;
 		try {                

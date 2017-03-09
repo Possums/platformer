@@ -26,14 +26,14 @@ public class PlatformerMap extends GameMap {
 
 	public PlatformerMap() {
 		doge = (new Doge(mapX/200,0, mapX/36, 3, 0, 0));
-		platform1 = new Platform(0,0,0,0,   0, mapY/2, mapX/2, mapY/2);
-		platform2 = new Platform(0,0,0,0,   mapX/8, mapY/2, mapX/2, mapY/2);
-		platform3 = new Platform(0,0,0,0,   mapX/4, mapY/2, mapX/2, mapY/2);
-		platform4 = new Platform(0,0,0,0, (int)(mapX/2.5), (int)(mapY/1.4), mapX/2,  mapY/2);
-		platform5 = new Platform(0,0,0,0, (int)(mapX/2), (int)(mapY/2.5), mapX/2,  mapY/2);
-		platform6 = new Platform(0,0,0,0, (int)(mapX/1.6), (int)(mapY/2.5), mapX/2, mapY/2);
-		platform7 = new MiniPlatform(0,0,0,0, (int)(mapX/1.2), (int)(mapY/1.5), mapX/8, mapY/2);
-		portal = new Portal(0,0,0,0, (int)(mapX/1.1), (int)(mapY/1.5), mapX/6, mapY/3);
+		platform1 = new Platform(0, mapY/2, mapX/2, mapY/2);
+		platform2 = new Platform(mapX/8, mapY/2, mapX/2, mapY/2);
+		platform3 = new Platform(mapX/4, mapY/2, mapX/2, mapY/2);
+		platform4 = new Platform((int)(mapX/2.5), (int)(mapY/1.4), mapX/2,  mapY/2);
+		platform5 = new Platform((int)(mapX/2), (int)(mapY/2.5), mapX/2,  mapY/2);
+		platform6 = new Platform((int)(mapX/1.6), (int)(mapY/2.5), mapX/2, mapY/2);
+		platform7 = new MiniPlatform((int)(mapX/1.2), (int)(mapY/1.5), mapX/8, mapY/2);
+		portal = new Portal((int)(mapX/1.1), (int)(mapY/1.5), mapX/6, mapY/3);
 		addGameObject(platform1);
 		addGameObject(platform2);
 		addGameObject(platform3);

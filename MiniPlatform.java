@@ -10,8 +10,8 @@ public class MiniPlatform extends GameObject {
 	
 	Image platform2;
 	int mapX, mapY;
-	public MiniPlatform(double speed, double direction, int size, double health, int x, int y, int mapX, int mapY){
-		super(speed, direction, size, health, x, y, null);
+	public MiniPlatform(int x, int y, int mapX, int mapY){
+		super(0,0,0,0,x, y, null);
 		this.mapX = mapX;
 		this.mapY = mapY;
 		try {                

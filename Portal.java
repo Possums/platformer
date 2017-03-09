@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 public class Portal extends GameObject {
 	Image portal;
 	int mapX, mapY;
-	public Portal(double speed, double direction, int size, double health, int x, int y, int mapX, int mapY){
-		super(speed, direction, size, health, x, y, null);
+	public Portal(int x, int y, int mapX, int mapY){
+		super(0,0,0,0, x, y, null);
 		setBoundingRect(getX(), getY(), size*2, size*3);
 		openImage();
 		this.mapX = mapX;
