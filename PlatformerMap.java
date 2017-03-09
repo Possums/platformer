@@ -43,7 +43,7 @@ public class PlatformerMap extends GameMap {
 		addGameObject(platform7);
 		addGameObject(portal);
 		addGameObject(doge);
-		//159,293
+//159,293
 	}
 
 	public void tick(){
@@ -54,11 +54,11 @@ public class PlatformerMap extends GameMap {
 		}
 		else if (!intersect()){
 			doge.setY(doge.getY()+(mapY/35));
-
+			
 		}
 		doge.setBoundingRect(doge.getX(), doge.getY(), mapX/18, mapX/12);
 		if (intersect()){
-			doge.setSpeed(0);
+			jump = false;
 			//JOptionPane.showMessageDialog(null, "intersection");
 		}
 		shootCounter++;
@@ -66,11 +66,6 @@ public class PlatformerMap extends GameMap {
 		//System.out.println("platform" + platform1.getBoundingRect());
 		if(doge.getBoundingRect().intersects(portal.getBoundingRect()))
 			changeStage();
-
-
-		if (portalIntersect()){
-			JOptionPane.showMessageDialog(null, "YOU JUST TELEPORTED TO HELL");
-		}
 	}
 	public void changeStage(){
 		platform1.setX((int)(Math.random()*mapX));
@@ -90,19 +85,6 @@ public class PlatformerMap extends GameMap {
 		doge.setX(0);
 		doge.setY(0);
 	}
-
-	public boolean portalIntersect(){
-		for (int i=0; i<movers.size(); i++){
-			if (movers.get(i) instanceof Portal){
-				if (doge.getBoundingRect().intersects(movers.get(i).getBoundingRect())){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-
 	public boolean intersect(){
 		for (int i=0; i<movers.size(); i++){
 			if (movers.get(i) instanceof Platform || movers.get(i) instanceof MiniPlatform){
@@ -155,7 +137,7 @@ public class PlatformerMap extends GameMap {
 	}
 
 	public void shoot(){
-		if(shootCounter >5){
+	if(shootCounter >5){
 			addGameObject(doge.shoot());
 			shootCounter = 0;
 		}
@@ -184,13 +166,13 @@ public class PlatformerMap extends GameMap {
 	public void moveRight(){
 		//doge.setX((int)(doge.getX()+10));
 		doge.setDirection(0);
-		doge.setSpeed(mapY/100);
+		doge.setSpeed(doge.getSpeed()+mapY/500);
 	}
 
 	public void moveLeft(){
 		//doge.setX((int)(doge.getX()-10));
 		doge.setDirection(Math.PI);
-		doge.setSpeed(mapY/100);
+		doge.setSpeed(doge.getSpeed()+mapY/500);
 	}
 
 }
