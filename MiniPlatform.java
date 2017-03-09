@@ -6,24 +6,24 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-public class Platform extends GameObject {
+public class MiniPlatform extends GameObject {
 	
-	Image platform;
+	Image platform2;
 	int mapX, mapY;
-	public Platform(double speed, double direction, int size, double health, int x, int y, int mapX, int mapY){
+	public MiniPlatform(double speed, double direction, int size, double health, int x, int y, int mapX, int mapY){
 		super(speed, direction, size, health, x, y, null);
 		this.mapX = mapX;
 		this.mapY = mapY;
 		try {                
-			URL url = getClass().getResource("images/platform.png");
-			platform = ImageIO.read(url);
+			URL url = getClass().getResource("images/platform2.png");
+			platform2 = ImageIO.read(url);
 		} 
 		catch (IOException ex) {
 			// handle exception...
 		
 		
 		}
-		this.setBoundingRect(this.getX(), this.getY(), mapX/4, mapY/16);
+		this.setBoundingRect(this.getX(), this.getY(), mapX/6, mapY/16);
 	}
 	@Override
 	public void checkOffScreen() {
@@ -33,7 +33,8 @@ public class Platform extends GameObject {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(platform, this.getX() , this.getY(), mapX/4, mapY/16, null);
+		
+		g.drawImage(platform2, this.getX() , this.getY(), mapX/6, mapY/16, null);
 		//g.drawRect(this.getX(), this.getY(), this.getBoundingRect().width, this.getBoundingRect().height);
 	}
 

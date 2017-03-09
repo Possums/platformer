@@ -18,7 +18,7 @@ public class PlatformerMap extends GameMap {
 	int mapX = a.width;
 	int mapY = a.height;
 	Doge doge;
-	GameObject platform1, platform2, platform3;
+	GameObject platform1, platform2, platform3, platform4, platform5, platform6, platform7;
 	boolean jump;
 	int jumpCounter;
 	int shootCounter;
@@ -26,31 +26,35 @@ public class PlatformerMap extends GameMap {
 	public PlatformerMap() {
 		doge = (new Doge(mapX/200,0, mapX/36, 3, 0, 0));
 		platform1 = new Platform(0,0,0,0,   0, mapY/2, mapX/2, mapY/2);
-		platform2 = new Platform(0,0,0,0,   mapX/4, mapY/2, mapX/2, mapY/2);
-		platform3 = new Platform(0,0,0,0,   mapX/4, mapY/4, mapX/2, mapY/2);
+		platform2 = new Platform(0,0,0,0,   mapX/8, mapY/2, mapX/2, mapY/2);
+		platform3 = new Platform(0,0,0,0,   mapX/4, mapY/2, mapX/2, mapY/2);
+		platform4 = new Platform(0,0,0,0, (int)(mapX/2.5), (int)(mapY/1.4), mapX/2,  mapY/2);
+		platform5 = new Platform(0,0,0,0, (int)(mapX/2), (int)(mapY/2.5), mapX/2,  mapY/2);
+		platform6 = new Platform(0,0,0,0, (int)(mapX/1.6), (int)(mapY/2.5), mapX/2, mapY/2);
+		platform7 = new MiniPlatform(0,0,0,0, (int)(mapX/1.2), (int)(mapY/1.5), mapX/8, mapY/2);
 		addGameObject(platform1);
 		addGameObject(platform2);
 		addGameObject(platform3);
+		addGameObject(platform4);
+		addGameObject(platform5);
+		addGameObject(platform6);
+		addGameObject(platform7);
 		addGameObject(doge);
-
+//159,293
 	}
 
 	public void tick(){
 		super.tick();
-		if (jump && jumpCounter < 15){
+		if (jump && jumpCounter < 10){
 			doge.setY(doge.getY()-(mapY/35));
 			jumpCounter++;
 		}
-		else if (!(doge.getBoundingRect().intersects(platform1.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform3.getBoundingRect()))){
+		else if (!intersect()){
 			doge.setY(doge.getY()+(mapY/35));
 			
 		}
 		doge.setBoundingRect(doge.getX(), doge.getY(), mapX/18, mapX/12);
-		if (doge.getBoundingRect().intersects(platform1.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform3.getBoundingRect())){
+		if (intersect()){
 			doge.setSpeed(0);
 			//JOptionPane.showMessageDialog(null, "intersection");
 		}
@@ -58,6 +62,17 @@ public class PlatformerMap extends GameMap {
 		//System.out.println("doge" + doge.getBoundingRect());
 		//System.out.println("platform" + platform1.getBoundingRect());
 
+	}
+	
+	public boolean intersect(){
+		for (int i=0; i<movers.size(); i++){
+			if (movers.get(i) instanceof Platform || movers.get(i) instanceof MiniPlatform){
+				if (doge.getBoundingRect().intersects(movers.get(i).getBoundingRect())){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -95,10 +110,7 @@ public class PlatformerMap extends GameMap {
 		//---------------------
 		g.setFont(new Font("Comic Sans MS", Font.PLAIN, 300)); 
 		g.setColor(Color.YELLOW);
-		FontMetrics metrics = g.getFontMetrics();
-		int x = (3840 - metrics.stringWidth("Wow")) / 2;
-		int y = ((2160 - metrics.getHeight()) / 2) + metrics.getAscent();
-		g.drawString("Wow", x, y);
+		g.drawString("Wow", mapX/8, (int)(mapY * 0.75));
 		//---------------------
 		super.draw(g);
 	}
@@ -116,19 +128,15 @@ public class PlatformerMap extends GameMap {
 
 	public void moveDown(){
 		//t.setY((int)(t.getY()-10));
-		if (!(doge.getBoundingRect().intersects(platform1.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform3.getBoundingRect()))){
-			doge.setDirection((Math.PI/2));
-			doge.setSpeed(mapY/160);
-		}
+		//		if (!intersect()){
+		//			doge.setDirection((Math.PI/2));
+		//			doge.setSpeed(mapY/160);
+		//		}
 	}
 
 	public void moveUp(){
 		//t.setY((int)(doge.getY()+10));
-		if (doge.getBoundingRect().intersects(platform1.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform2.getBoundingRect())
-				|| doge.getBoundingRect().intersects(platform3.getBoundingRect())){
+		if (intersect()){
 			jump = true;
 			jumpCounter = 0;
 		}

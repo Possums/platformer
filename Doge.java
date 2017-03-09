@@ -28,7 +28,7 @@ public class Doge extends GameObject {
 	
 	public GameObject shoot(){
 		Dew b = new Dew(projectileSpeed, 0, getSize()/10, 1000, this.getX(), this.getY(), Color.red);
-		System.out.println("shoot mountain dews");
+		//System.out.println("shoot mountain dews");
 		return b;
 	
 	}
@@ -37,7 +37,7 @@ public class Doge extends GameObject {
 	public void draw(Graphics g) {
 		getImg().getHeight(null);
 		g.drawImage(getImg(), getX(), getY(), null);
-		g.drawRect(this.getX(), this.getY(), this.getBoundingRect().width, this.getBoundingRect().height);
+		//g.drawRect(this.getX(), this.getY(), this.getBoundingRect().width, this.getBoundingRect().height);
 	}
 	
 }
