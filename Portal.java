@@ -12,7 +12,7 @@ public class Portal extends GameObject {
 	int mapX, mapY;
 	public Portal(int x, int y, int mapX, int mapY){
 		super(0,0,0,0, x, y, null);
-		setBoundingRect(getX(), getY(), size*2, size*3);
+		setBoundingRect(getX(), getY(), mapX/2, mapY/2);
 		openImage();
 		this.mapX = mapX;
 		this.mapY = mapY;

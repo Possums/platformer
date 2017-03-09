@@ -64,9 +64,27 @@ public class PlatformerMap extends GameMap {
 		shootCounter++;
 		//System.out.println("doge" + doge.getBoundingRect());
 		//System.out.println("platform" + platform1.getBoundingRect());
-
+		if(doge.getBoundingRect().intersects(portal.getBoundingRect()))
+			changeStage();
 	}
-	
+	public void changeStage(){
+		platform1.setX((int)(Math.random()*mapX));
+		platform1.setY((int)(Math.random()*mapY));
+		platform2.setX((int)(Math.random()*mapX));
+		platform2.setY((int)(Math.random()*mapY));
+		platform3.setX((int)(Math.random()*mapX));
+		platform3.setY((int)(Math.random()*mapY));
+		platform4.setX((int)(Math.random()*mapX));
+		platform4.setY((int)(Math.random()*mapY));
+		platform5.setX((int)(Math.random()*mapX));
+		platform5.setY((int)(Math.random()*mapY));
+		platform6.setX((int)(Math.random()*mapX));
+		platform6.setY((int)(Math.random()*mapY));
+		platform7.setX((int)(Math.random()*mapX));
+		platform7.setY((int)(Math.random()*mapY));
+		doge.setX(0);
+		doge.setY(0);
+	}
 	public boolean intersect(){
 		for (int i=0; i<movers.size(); i++){
 			if (movers.get(i) instanceof Platform || movers.get(i) instanceof MiniPlatform){

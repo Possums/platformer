@@ -35,6 +35,7 @@ public class MiniPlatform extends GameObject {
 	public void draw(Graphics g) {
 		
 		g.drawImage(platform2, this.getX() , this.getY(), mapX/6, mapY/16, null);
+		this.setBoundingRect(this.getX(), this.getY(), mapX/4, mapY/16);
 		//g.drawRect(this.getX(), this.getY(), this.getBoundingRect().width, this.getBoundingRect().height);
 	}
 

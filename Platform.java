@@ -34,6 +34,7 @@ public class Platform extends GameObject {
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(platform, this.getX() , this.getY(), mapX/4, mapY/16, null);
+		this.setBoundingRect(this.getX(), this.getY(), mapX/4, mapY/16);
 		//g.drawRect(this.getX(), this.getY(), this.getBoundingRect().width, this.getBoundingRect().height);
 	}
 
