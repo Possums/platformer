@@ -19,6 +19,7 @@ public class PlatformerMap extends GameMap {
 	int mapY = a.height;
 	Doge doge;
 	GameObject platform1, platform2, platform3, platform4, platform5, platform6, platform7;
+	Portal portal;
 	boolean jump;
 	int jumpCounter;
 	int shootCounter;
@@ -32,6 +33,7 @@ public class PlatformerMap extends GameMap {
 		platform5 = new Platform(0,0,0,0, (int)(mapX/2), (int)(mapY/2.5), mapX/2,  mapY/2);
 		platform6 = new Platform(0,0,0,0, (int)(mapX/1.6), (int)(mapY/2.5), mapX/2, mapY/2);
 		platform7 = new MiniPlatform(0,0,0,0, (int)(mapX/1.2), (int)(mapY/1.5), mapX/8, mapY/2);
+		portal = new Portal(0,0,0,0, (int)(mapX/1.1), (int)(mapY/1.5), mapX/6, mapY/3);
 		addGameObject(platform1);
 		addGameObject(platform2);
 		addGameObject(platform3);
@@ -39,6 +41,7 @@ public class PlatformerMap extends GameMap {
 		addGameObject(platform5);
 		addGameObject(platform6);
 		addGameObject(platform7);
+		addGameObject(portal);
 		addGameObject(doge);
 //159,293
 	}
