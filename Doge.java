@@ -18,7 +18,7 @@ public class Doge extends GameObject {
 	       } catch (IOException ex) {
 	            // handle exception...
 	       }
-		
+		this.setSpeed(0);
 	}
 	@Override
 	public void checkOffScreen() {

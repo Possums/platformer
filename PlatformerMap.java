@@ -20,10 +20,11 @@ public class PlatformerMap extends GameMap {
 	Doge doge;
 	GameObject platform1, platform2, platform3, platform4, platform5, platform6, platform7;
 	Portal portal;
+	Enemy pepe;
 	boolean jump;
 	int jumpCounter;
 	int shootCounter;
-
+	
 	public PlatformerMap() {
 		doge = (new Doge(mapX/200,0, mapX/36, 3, 0, 0));
 		platform1 = new Platform(0, mapY/2, mapX/2, mapY/2);
@@ -34,6 +35,7 @@ public class PlatformerMap extends GameMap {
 		platform6 = new Platform((int)(mapX/1.6), (int)(mapY/2.5), mapX/2, mapY/2);
 		platform7 = new MiniPlatform((int)(mapX/1.2), (int)(mapY/1.5), mapX/8, mapY/2);
 		portal = new Portal((int)(mapX/1.1), (int)(mapY/1.5), mapX/6, mapY/3);
+		pepe = new  Enemy(mapY/100, Math.PI, mapX/10, 500 ,(int)(mapX/1.7), (int)(mapY/4.55));
 		addGameObject(platform1);
 		addGameObject(platform2);
 		addGameObject(platform3);
@@ -42,6 +44,7 @@ public class PlatformerMap extends GameMap {
 		addGameObject(platform6);
 		addGameObject(platform7);
 		addGameObject(portal);
+		addGameObject(pepe);
 		addGameObject(doge);
 //159,293
 	}
@@ -56,7 +59,13 @@ public class PlatformerMap extends GameMap {
 			doge.setY(doge.getY()+(mapY/35));
 			
 		}
+		
+		if (!enemyIntersect()){
+			pepe.setY(pepe.getY()+(mapY/35));
+		}
+		
 		doge.setBoundingRect(doge.getX(), doge.getY(), mapX/18, mapX/12);
+		pepe.setBoundingRect(pepe.getX(), pepe.getY(), mapX/10, mapX/10);
 		if (intersect()){
 			jump = false;
 			//JOptionPane.showMessageDialog(null, "intersection");
@@ -68,19 +77,19 @@ public class PlatformerMap extends GameMap {
 			changeStage();
 	}
 	public void changeStage(){
-		platform1.setX((int)(Math.random()*mapX));
-		platform1.setY((int)(Math.random()*mapY));
-		platform2.setX((int)(Math.random()*mapX));
+		platform1.setX(0);
+		platform1.setY((int)(0.2*mapY));
+		platform2.setX(mapX/8);
 		platform2.setY((int)(Math.random()*mapY));
-		platform3.setX((int)(Math.random()*mapX));
+		platform3.setX((int)(mapX/3.5));
 		platform3.setY((int)(Math.random()*mapY));
-		platform4.setX((int)(Math.random()*mapX));
+		platform4.setX(mapX/2);
 		platform4.setY((int)(Math.random()*mapY));
-		platform5.setX((int)(Math.random()*mapX));
+		platform5.setX((int)(mapX/1.6));
 		platform5.setY((int)(Math.random()*mapY));
-		platform6.setX((int)(Math.random()*mapX));
+		platform6.setX((int)(mapX/1.2));
 		platform6.setY((int)(Math.random()*mapY));
-		platform7.setX((int)(Math.random()*mapX));
+		platform7.setX((int)(mapX/1.1));
 		platform7.setY((int)(Math.random()*mapY));
 		doge.setX(0);
 		doge.setY(0);
@@ -115,6 +124,17 @@ public class PlatformerMap extends GameMap {
 			e.printStackTrace();
 		}	
 
+	}
+	
+	public boolean enemyIntersect(){
+		for (int i=0; i<movers.size(); i++){
+			if (movers.get(i) instanceof Platform || movers.get(i) instanceof MiniPlatform){
+				if (pepe.getBoundingRect().intersects(movers.get(i).getBoundingRect())){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void draw(Graphics g){
@@ -166,13 +186,13 @@ public class PlatformerMap extends GameMap {
 	public void moveRight(){
 		//doge.setX((int)(doge.getX()+10));
 		doge.setDirection(0);
-		doge.setSpeed(doge.getSpeed()+mapY/500);
+		doge.setSpeed(doge.getSpeed()+mapY/1000);
 	}
 
 	public void moveLeft(){
 		//doge.setX((int)(doge.getX()-10));
 		doge.setDirection(Math.PI);
-		doge.setSpeed(doge.getSpeed()+mapY/500);
+		doge.setSpeed(doge.getSpeed()+mapY/1000);
 	}
 
 }

@@ -8,8 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Enemy extends GameObject {
 	Image pepe;
-	public Enemy(double speed, double direction, int size, double health,
-			int x, int y) {
+	public Enemy(double speed, double direction, int size, double health,int x, int y) {
 		super(speed, direction, size, health, x, y, null);
 		try {
 			URL url = getClass().getResource("images/pepe.png");
@@ -43,7 +42,7 @@ public class Enemy extends GameObject {
 	@Override
 	public void checkOffScreen() {
 		// TODO Auto-generated method stub
-
+	
 	}
 
 }
