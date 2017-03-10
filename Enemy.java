@@ -28,13 +28,14 @@ public class Enemy extends GameObject {
 	public void turn(){
 		if(getDirection() == 0)
 			setDirection(Math.PI);
-		if(getDirection() == Math.PI)
+		else if (getDirection() == Math.PI)
 			setDirection(0);
 	}
 	
 	
 	public GameObject shoot(){
-		Dew b = new Dew(getSpeed()*1.5, 0, getSize()/10, 1000, this.getX(), this.getY(), Color.red);
+		Dew b = new Dew(getSpeed()*1.5, Math.PI, getSize()/30, 1000, this.getX(), this.getY(), Color.red, "pepe");
+		
 		return b;
 	
 	}

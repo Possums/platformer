@@ -27,7 +27,7 @@ public class Doge extends GameObject {
 	}
 	
 	public GameObject shoot(){
-		Dew b = new Dew(projectileSpeed, 0, getSize()/10, 1000, this.getX(), this.getY(), Color.red);
+		Dew b = new Dew(projectileSpeed, 0, getSize()/10, 1000, this.getX(), this.getY(), Color.red, "doge");
 		//System.out.println("shoot mountain dews");
 		return b;
 	
